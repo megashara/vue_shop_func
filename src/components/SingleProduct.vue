@@ -1,39 +1,41 @@
 <template>
-  <div class="item" :class="checkPrice">
-    <div class="item-name">{{ product.N }}({{ product.P }})</div>
-    <div class="item-price">{{ product.newC }}</div>
-    <button @click="addToCartProduct">Добавить в корзину</button>
+  <div class="item-product" :class="checkPrice" @click="addToCartProduct">
+    <div class="item-name">{{ product.N }} ( {{ product.P }} )</div>
+    <div class="item-price">{{ product.newC }} p.</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "VMainWrapper",
+  name: 'VMainWrapper',
   props: {
     product: Object,
   },
   data: function () {
-    return{
+    return {
       green: false,
       red: false
     }
   },
   methods: {
     addToCartProduct: function() {
-      this.$emit("addToCartProduct", this.product);
+      this.$emit("addToCartProduct", this.product)
     },
   },
   computed: {
     checkPrice: function() {
-      if(this.product.oldC !== ''){
-        if(this.product.oldC < this.product.newC){
+      if (this.product.oldC !== '') {
+        if (this.product.oldC < this.product.newC) {
           this.green = false
           this.red = true
-        }else{
+        } else if (this.product.oldC > this.product.newC) {
           this.green = true
           this.red = false
+        } else {
+          this.green = false
+          this.red = false
         }
-      }else{
+      } else {
         this.green = false
         this.red = false
       }
@@ -44,16 +46,5 @@ export default {
 </script>
 
 <style lang="scss">
-.item {
-  margin-bottom: 5px;
-  border: 1px solid #000;
-  &.red{
-    background: red;
-    color:#fff;
-  }
-  &.green{
-    background: green;
-    color:#fff;
-  }
-}
+  
 </style>

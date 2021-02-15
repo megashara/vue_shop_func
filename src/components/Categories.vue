@@ -14,7 +14,7 @@
 import SingleProduct from './SingleProduct'
 
 export default {
-  name: "Categories",
+  name: 'Categories',
   props: {
     category: Object
   },
@@ -22,7 +22,7 @@ export default {
     SingleProduct
   },
   methods: {
-    addToCart: function(data){
+    addToCart: function (data) {
       this.$emit('addToCart', data)
     }
   }

@@ -1,27 +1,26 @@
 <template>
-    <div class="item">
+    <div class="item-cart">
         <div class="item-name">
           {{cartItem.N}}
         </div>
         <div class="item-quantity">
-          <span v-if="cartItem.quantity > 1" @click="decrementItem">-</span>
-          {{cartItem.quantity}}
-          <span v-if="cartItem.quantity < cartItem.P" @click="incrementItem">+</span>
+          <span class="item-quantity-sim" v-if="cartItem.quantity > 1" @click="decrementItem">-</span>
+          <span class="item-quantity-number">{{cartItem.quantity}}</span>
+          <span class="item-quantity-sim" v-if="cartItem.quantity < cartItem.P" @click="incrementItem">+</span>
         </div>
         <div class="item-price">
-          {{cartItem.newC}}
+          {{cartItem.newC}} p.
         </div>
         <button @click="deleteItemCart">Удалить</button>
     </div>
 </template>
 
 <script>
-import store from '@/store/index'
 
 export default {
-  name: "CartItem",
+  name: 'CartItem',
   props: {
-    cartItem:{
+    cartItem: {
       type: Object
     }
   },
@@ -29,23 +28,19 @@ export default {
     deleteItemCart() {
       this.$emit('deleteItemCart')
     },
-    decrementItem(){
+    decrementItem() {
       this.$emit('decrementItem')
     },
-    incrementItem(){
+    incrementItem() {
       this.$emit('incrementItem')
     }
   },
   mounted() {
-    this.$set(this.cartItem, 'quantity',1)
+    this.$set(this.cartItem, 'quantity', 1)
   }
 };
 </script>
 
 <style lang="scss">
-  .item{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  
 </style>

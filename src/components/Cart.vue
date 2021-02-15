@@ -1,6 +1,12 @@
 <template>
     <div class="Cart">
         <h2>Корзина</h2>
+        <div class="cart-header">
+          <div>Наименование товара</div>
+          <div>Количество</div>
+          <div>Цена</div>
+          <div></div>
+        </div>
         <CartItem 
           v-for="(item,index) in cartData" 
           :key="item.T"
@@ -10,8 +16,8 @@
           @decrementItem="decrementItem(index)"
         />
         <div class="cartTotalPrice">
-          <p>Сумма:</p>
-          <p>{{cartTotalCost}}</p>
+          <p>Сумма: </p>
+          <p>{{cartTotalCost}} p.</p>
         </div>
     </div>
 </template>
@@ -21,27 +27,27 @@ import CartItem from './CartItem'
 import store from '@/store/index'
 
 export default {
-  name: "Cart",
+  name: 'Cart',
   props: {
-    cartData:{
+    cartData: {
       type: Array
     }
   },
   components: {
     CartItem
   },
-  computed:{
+  computed: {
     cartTotalCost() {
-      let result =[]
-      if(this.cartData.length){
+      let result = []
+      if (this.cartData.length) {
         for (let item of this.cartData) {
           result.push(item.newC * item.quantity)
         }
-        result = result.reduce(function(sum, el){
+        result = result.reduce(function (sum, el) {
           return sum + el
         })
         return result.toFixed(2)
-      }else{
+      } else {
         return 0
       }
     }
@@ -61,9 +67,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .cartTotalPrice{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
+  
 </style>
